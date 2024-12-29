@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col text-right">
+    <button
+    routerLink="addproduct"
+    mat-raised-button color="primary">
+    Add product
+    </button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card mb-4" *ngFor="let product of productinfo"
+    [ngClass]="{
+      active:product.id === selectedproductId
+    }"
+    [routerLink]="product.id"
+    [queryParams]="{canreturn:product.canreturn}"
+    (click)="onclickproduct(product)">
+
+      <div class="card-body"
+      [ngClass]="{
+        'notavail':!product.isAvailable
+      }">
+     <div class="imgcontainer">
+      <img [src]="product.image" class="img-fluid"
+      [alt]="product.name"
+      [title]="product.name"
+      >
+     </div>
+
+     <div class="parainfo ml-3 mt-3">
+      <h3>
+        {{product.name}}
+        <small class="p-2"
+        [ngClass]="{
+          'bg-success':product.rating >=4,
+          'bg-warning':product.rating >=3 && product.rating <4,
+          'bg-danger':product.rating < 3
+        }">
+        {{product.rating}}
+        </small>
+      </h3>
+
+      <h4>
+        {{product.offerprice}}
+      </h4>
+
+      <small class="text-muted pricecss">{{product.price}}</small>
+
+      <strong class="d-block text-danger"
+      *ngIf="product.noofitem < 10"
+      >only {{product.noofitem}} left</strong>
+     </div>
+     <br>
+     <div class="text-danger noproduct" *ngIf="!product.isAvailable">
+      Currently unavailable
+     </div>
+
+    </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <router-outlet></router-outlet>
+    </div>
+
+</div>

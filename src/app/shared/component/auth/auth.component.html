@@ -1,0 +1,75 @@
+
+<main class="main">
+  <div class="card">
+    <div class="card-body">
+   <!-- loginform -->
+   <ng-container *ngIf="allReadyHasAccount">
+    <h2>
+      Log In
+    </h2>
+    <form [formGroup]="LogInform" (ngSubmit)="onLogIn()">
+      <div class="form-group">
+        <label for="email">Email</label>
+       <input type="text"
+       formControlName="email"
+       id="email" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+       <input
+       formControlName="password"
+       type="text" id="password" class="form-control">
+      </div>
+
+      <button mat-raised-button color="primary">Log In</button>
+    </form>
+
+   </ng-container>
+
+
+   <!-- signupform -->
+
+   <ng-container *ngIf="!allReadyHasAccount">
+    <h2>
+      Sign Up
+    </h2>
+    <form [formGroup]="Signupform" (ngSubmit)="onSignup()">
+      <div class="form-group">
+        <label for="email">Email</label>
+       <input type="text"
+       formControlName ="email"
+       id="email" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+       <input
+       formControlName="password"
+       type="text" id="password" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="confirmpassword">Password</label>
+       <input
+       formControlName="confirmpassword"
+       type="text" id="confirmpassword" class="form-control">
+      </div>
+
+      <button mat-raised-button color="primary">Sign Up</button>
+    </form>
+
+
+   </ng-container>
+
+
+   <hr>
+    <a href="javascript:;"
+    (click)="allReadyHasAccount = !allReadyHasAccount"
+    class="btn btn-link">
+    {{allReadyHasAccount ?'Dont Have Account yet?' :'Already Have Account'}}
+    </a>
+    </div>
+  </div>
+</main>
+

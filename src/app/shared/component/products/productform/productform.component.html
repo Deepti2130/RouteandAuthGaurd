@@ -1,0 +1,104 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-body">
+      <form [formGroup]="productForm" (ngSubmit)="onproductAdd()">
+        <div class="form-group">
+          <label for="name">Product Name</label>
+          <input
+          formControlName="name"
+          type="text" class="form-control" id="name">
+        </div>
+
+        <div class="form-group">
+          <label for="image">Image</label>
+          <input
+          formControlName="image"
+          type="text" class="form-control" id="image">
+        </div>
+
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input
+          formControlName="price"
+          type="text" class="form-control" id="price">
+        </div>
+
+        <div class="form-group">
+          <label for="offerprice">Offerprice</label>
+          <input
+          formControlName="offerprice"
+          type="text" class="form-control" id="offerprice">
+        </div>
+
+        <div class="form-group">
+          <label for="rating">Rating</label>
+          <input
+          formControlName="rating"
+          type="text" class="form-control" id="rating">
+        </div>
+
+        <div class="form-group">
+          <label for="noofitem">No. of item</label>
+          <input
+          formControlName="noofitem"
+          type="text" class="form-control" id="noofitem">
+        </div>
+
+        <div class="form-group">
+          <label
+          for="pstatus">Product status</label>
+          <select
+          formControlName="pstatus"
+          type="text" class="form-control" id="pstatus">
+          <option value="">Select status</option>
+          <option value="Inprogress">Inprogress</option>
+          <option value="Dispatched">Dispatched</option>
+          <option value="Delivered">Delivered</option>
+
+            </select>
+        </div>
+
+        <div class="form-group">
+          <label
+          for="canreturn">product canreturn</label>
+          <select
+          formControlName="canreturn"
+          type="text" class="form-control" id="canreturn">
+            <option value="">Select canreturn</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+          <label for="isAvailable">isAvailable</label>
+          <select
+          formControlName="isAvailable"
+          type="text" class="form-control" id="isAvailable">
+            <option value="">Select isAvailable</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            </select>
+        </div>
+
+
+        <button
+        *ngIf="!isIneditmode"
+        type="submit"
+        mat-raised-button color="primary" class="mr-3">Add Product</button>
+
+        <button
+        [disabled]="updatebtnFlag"
+        (click)="onupdateproduct()"
+        *ngIf="isIneditmode"
+        type="button"
+        mat-raised-button color="primary">Update Product</button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>

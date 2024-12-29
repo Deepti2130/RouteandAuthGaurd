@@ -1,0 +1,12 @@
+<p>
+  The Username is <strong>{{userinfo.username}}</strong> with id <strong>{{userinfo.userid}}</strong>
+</p>
+
+<button
+(click)="gotoEdituser()"
+mat-raised-button color="primary" class="mr-3">Edit user</button>
+
+
+<button
+(click)="onRemoveuser()"
+mat-raised-button color="warn">Remove user</button>
