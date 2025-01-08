@@ -89,4 +89,15 @@ export class ProductformComponent implements OnInit {
 
   }
 
+  canDeactivate(){
+    if(this.productForm.dirty){
+      let getconfirm = confirm('Are you sure you want to descard the changes??')
+      return (getconfirm)
+
+    }
+    return true
+  }
+
+
+
 }

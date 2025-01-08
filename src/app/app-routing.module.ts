@@ -12,6 +12,11 @@ import { ProductComponent } from './shared/component/products/product/product.co
 import { FairDetailsComponent } from './shared/component/fairs/fair-details/fair-details.component';
 import { AuthGuardService } from './shared/service/auth-guard.service';
 import { AuthComponent } from './shared/component/auth/auth.component';
+import { UserRoleGuard } from './shared/service/user-role.guard';
+import { AdminDashComponent } from './shared/component/admin-dash/admin-dash.component';
+import { CompDeactGuard } from './shared/service/comp-deact.guard';
+import { ProductsResolver } from './shared/service/products.resolver';
+import { ProductSingleResolver } from './shared/service/product-single.resolver';
 
 const routes: Routes = [
   {
@@ -22,11 +27,21 @@ const routes: Routes = [
   },
   {
     path:"home",
-    component:HomeComponent
+    component:HomeComponent,
+    canActivate:[AuthGuardService, UserRoleGuard],
+    title:'Dashboard',
+    data:{
+      userrole:["Admin", "Buyer", "SuperAdmin"]
+    }
   },
   {
     path:"users",
     component:UsersComponent,
+    canActivate:[AuthGuardService, UserRoleGuard],
+    title:'users',
+    data:{
+      userrole:["Admin", "SuperAdmin"]
+    },
     children:[
       {
         path:"addusers",
@@ -46,6 +61,13 @@ const routes: Routes = [
   {
     path:"products",
     component:ProductsComponent,
+    // canActivateChild:[AuthGuardService],
+    canActivate:[AuthGuardService, UserRoleGuard],
+    title:'products',
+    data:{
+      userrole:["Admin", "Buyer", "SuperAdmin"]
+    },
+    resolve:{productData:ProductsResolver},
     children:[
       {
         path:"addproduct",
@@ -53,11 +75,13 @@ const routes: Routes = [
       },
       {
         path:":id",
-        component:ProductComponent
+        component:ProductComponent,
+        resolve:{productobj:ProductSingleResolver}
       },
       {
         path:":id/edit",
-        component:ProductformComponent
+        component:ProductformComponent,
+        // canDeactivate:[CompDeactGuard]
       },
     ]
   },
@@ -65,7 +89,11 @@ const routes: Routes = [
   {
     path:"fairs",
     component:FairsComponent,
-    canActivate:[AuthGuardService],
+    canActivate:[AuthGuardService, UserRoleGuard],
+    title:'Dashboard',
+    data:{
+      userrole:["Admin", "Buyer", "SuperAdmin"]
+    },
     children:[
       {
         path:":fairId",
@@ -75,8 +103,22 @@ const routes: Routes = [
     ]
   },
   {
+    path:"admin",
+    component:AdminDashComponent,
+    canActivate:[AuthGuardService, UserRoleGuard],
+    title:'Admin-Dashboard',
+    data:{
+      userrole:[ "SuperAdmin"]
+    }
+  },
+  {
     path:"pagenotfound",
-    component:PagenotfoundComponent
+    component:PagenotfoundComponent,
+    canActivate:[AuthGuardService],
+    title:'pagenotfound',
+    data:{
+      msg:'pagenotfound(using static data of Routing)'
+    }
   },
   {
     path:"**",

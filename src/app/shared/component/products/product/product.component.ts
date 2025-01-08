@@ -15,19 +15,27 @@ productobj!:Iproduct
   constructor(
     private _routes:ActivatedRoute,
     private _productservice:ProductService
-  ) { }
+  ) {
+    console.log('sing prod const')
+    this._routes.data
+    .subscribe(res=>{
+      console.log(res)
+      this.productobj = res['productobj']
+    })
+  }
 
   ngOnInit(): void {
-    this._routes.params
-    .subscribe((params:Params)=>{
-      // console.log(params)
-      this.productid = params['id']
-      if(this.productid){
-        this.productobj= this._productservice.fetchproductdata(this.productid)
-      }
+    console.log('sing prod init')
+    // this._routes.params
+    // .subscribe((params:Params)=>{
+    //   // console.log(params)
+    //   this.productid = params['id']
+    //   if(this.productid){
+    //     this.productobj= this._productservice.fetchproductdata(this.productid)
+    //   }
 
 
-    })
+    // })
   }
 
   onremoveproduct(){

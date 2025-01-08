@@ -17,15 +17,28 @@ isAvailable:boolean = false
     private _productservice:ProductService,
     private _router:Router,
     private _routes:ActivatedRoute
-  ) { }
-
-  ngOnInit(): void {
-    this.productinfo = this._productservice.fetchAllproduct()
-    this.selectedproductId = this.productinfo[0].id,
+  ) {
+    console.log('products are construct')
+    console.log(this._routes)
+    this._routes.data
+    .subscribe(res=>{
+      this.productinfo = res['productData']
+      // console.log(this.productinfo)
+      this.selectedproductId = this.productinfo[0].id,
     this._router.navigate([this.productinfo[0].id],{
       relativeTo:this._routes,
       queryParams:{canreturn:this.productinfo[0].canreturn}
     })
+   })
+  }
+  ngOnInit(): void {
+    console.log('products are intialize')
+    // this.productinfo = this._productservice.fetchAllproduct()
+    // this.selectedproductId = this.productinfo[0].id,
+    // this._router.navigate([this.productinfo[0].id],{
+    //   relativeTo:this._routes,
+    //   queryParams:{canreturn:this.productinfo[0].canreturn}
+    // })
   }
 
   onclickproduct(product:Iproduct){
